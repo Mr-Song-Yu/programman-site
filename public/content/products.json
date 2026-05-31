@@ -3,11 +3,11 @@
     "id": "product-001",
     "slug": "prompt-brief-studio",
     "name": "Prompt Brief Studio",
-    "subtitle": "把零散需求整理成可执行开发 brief 的小工具",
-    "description": "面向 vibe-coding 的需求整理器，帮助把想法、约束、页面结构和验收标准一次性梳理清楚。",
+    "subtitle": "把零散想法整理成可执行开发 brief",
+    "description": "面向 vibe-coding 的需求整理器，用一套固定结构收拢目标用户、页面、数据、约束和验收标准，让 AI 开发从清楚的输入开始。",
     "status": "prototype",
     "year": "2026",
-    "tags": ["brief", "ai-workflow", "frontend"],
+    "tags": ["brief", "prompt", "workflow"],
     "links": {
       "demo": "",
       "repo": ""
@@ -15,17 +15,35 @@
     "image": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80",
     "featured": true,
     "published": true,
-    "highlights": ["结构化需求输入", "自动生成页面骨架", "适合个人项目启动"]
+    "highlights": ["一页式开发 brief", "自动列出不确定问题", "把验收标准写在编码之前"]
   },
   {
     "id": "product-002",
+    "slug": "skill-card-library",
+    "name": "Skill Card Library",
+    "subtitle": "把常用 AI 工作流沉淀成可复用 skill 卡片",
+    "description": "一个整理 skill、prompt、触发场景和输出格式的小型资料库。重点不是收藏提示词，而是让每个 skill 都有明确边界和验证方式。",
+    "status": "building",
+    "year": "2026",
+    "tags": ["skill", "knowledge-base", "ai-workflow"],
+    "links": {
+      "demo": "",
+      "repo": ""
+    },
+    "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1400&q=80",
+    "featured": true,
+    "published": true,
+    "highlights": ["按场景组织 skill", "记录输入和输出契约", "支持复盘哪些 prompt 真有用"]
+  },
+  {
+    "id": "product-003",
     "slug": "ship-log",
     "name": "Ship Log",
-    "subtitle": "为独立开发者准备的发布记录看板",
-    "description": "轻量记录每次产品迭代，包括功能、截图、发布链接和复盘，适合把持续开发变成公开资产。",
+    "subtitle": "独立开发者的发布记录和复盘台",
+    "description": "轻量记录每次产品迭代，包括变更、截图、部署链接、失败原因和下一轮行动。让持续开发变成公开资产。",
     "status": "idea",
     "year": "2026",
-    "tags": ["log", "portfolio", "builder"],
+    "tags": ["launch", "portfolio", "builder"],
     "links": {
       "demo": "",
       "repo": ""
@@ -33,17 +51,17 @@
     "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80",
     "featured": true,
     "published": true,
-    "highlights": ["时间线展示", "版本复盘", "可嵌入作品集"]
+    "highlights": ["版本时间线", "发布后检查清单", "把复盘转成下一轮 brief"]
   },
   {
-    "id": "product-003",
+    "id": "product-004",
     "slug": "domain-launch-kit",
     "name": "Domain Launch Kit",
     "subtitle": "个人域名上线检查清单",
-    "description": "聚合 DNS、GitHub Pages、HTTPS、SEO 和内容发布检查，减少从本地作品到公网网站之间的摩擦。",
-    "status": "building",
+    "description": "聚合 DNS、Cloudflare、GitHub Pages、HTTPS、SEO 和内容发布检查，减少从本地作品到公网网站之间的摩擦。",
+    "status": "launched",
     "year": "2026",
-    "tags": ["deployment", "dns", "checklist"],
+    "tags": ["deployment", "dns", "github-pages"],
     "links": {
       "demo": "",
       "repo": ""
@@ -51,6 +69,6 @@
     "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&q=80",
     "featured": false,
     "published": true,
-    "highlights": ["DNS 检查", "Pages 部署", "HTTPS 状态跟踪"]
+    "highlights": ["DNS 传播检查", "HTTPS 状态跟踪", "静态站部署路径"]
   }
 ]

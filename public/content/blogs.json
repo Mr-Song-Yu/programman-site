@@ -4,7 +4,7 @@
     "slug": "first-vibe-coding-lab",
     "title": "第一间 vibe-coding 实验室",
     "excerpt": "把一个模糊想法拆成可以运行的页面、脚本和产品原型，是我最喜欢的工作流。",
-    "content": "## 为什么开始记录\n\nvibe-coding 最迷人的地方，是它把想法和可运行的软件之间的距离压得很短。这个博客会记录我的实验、踩坑、复盘和产品化尝试。\n\n## 我会写什么\n\n- 从零构建的小工具\n- AI 辅助开发的真实工作流\n- 前端设计、部署和自动化笔记\n- 值得展示的 coding 产品\n\n```ts\nconst idea = \"ship something useful\";\nconst loop = [\"think\", \"build\", \"test\", \"write\"];\n```\n\n我希望这里不是一个静态作品墙，而是一条持续变亮的开发轨迹。",
+    "content": "## 为什么开始记录\n\nvibe-coding 最迷人的地方，是它把想法和可运行的软件之间的距离压得很短。这个博客会记录实验、踩坑、复盘和产品化尝试。\n\n## 我会写什么\n\n- 从零构建的小工具\n- AI 辅助开发的真实工作流\n- 前端设计、部署和自动化笔记\n- 值得展示的 coding 产品\n\n```ts\nconst idea = \"ship something useful\";\nconst loop = [\"think\", \"build\", \"verify\", \"write\"];\n```\n\n我希望这里不是一个静态作品墙，而是一条持续变亮的开发轨迹。",
     "author": "Programman",
     "date": "2026-05-31",
     "tags": ["vibe-coding", "workflow", "notes"],
@@ -24,5 +24,18 @@
     "published": true,
     "cover": "https://images.unsplash.com/photo-1556075798-4825dfaaf498?auto=format&fit=crop&w=1400&q=80",
     "readingMinutes": 4
+  },
+  {
+    "id": "post-003",
+    "slug": "prompt-design-principles",
+    "title": "prompt 设计不是魔法，是接口设计",
+    "excerpt": "好的 prompt 会限定输入、输出、验证方式和失败处理，让 AI 成为稳定工作流的一部分。",
+    "content": "## 先定义接口\n\n很多 prompt 失败，不是因为模型不聪明，而是因为任务没有边界。一个可复用 prompt 至少应该说明输入、输出、限制、判断标准和下一步。\n\n## 我常用的结构\n\n- 先说明角色和目标\n- 说明已有上下文和不可破坏的约束\n- 规定输出格式\n- 要求先发现风险，再给方案\n- 只在关键不确定处提问\n\n## 一个小原则\n\n不要要求 AI 一次性变成天才。让它先成为一个稳定的同事：会读上下文，会承认不确定，会验证自己的输出。",
+    "author": "Programman",
+    "date": "2026-05-31",
+    "tags": ["prompt", "design", "ai-workflow"],
+    "published": true,
+    "cover": "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1400&q=80",
+    "readingMinutes": 5
   }
 ]
