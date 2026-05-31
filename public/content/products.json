@@ -4,71 +4,89 @@
     "slug": "prompt-brief-studio",
     "name": "Prompt Brief Studio",
     "subtitle": "把零散想法整理成可执行开发 brief",
-    "description": "面向 vibe-coding 的需求整理器，用一套固定结构收拢目标用户、页面、数据、约束和验收标准，让 AI 开发从清楚的输入开始。",
+    "description": "面向 vibe-coding 的需求压缩器，用固定结构收拢目标用户、核心流程、页面结构、数据模型、约束和验收标准，让 AI 开发从清晰输入开始。",
     "status": "prototype",
     "year": "2026",
-    "tags": ["brief", "prompt", "workflow"],
+    "tags": ["brief", "prompt", "workflow", "ai-coding"],
     "links": {
       "demo": "",
       "repo": ""
     },
-    "image": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80",
+    "image": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=82",
     "featured": true,
     "published": true,
-    "highlights": ["一页式开发 brief", "自动列出不确定问题", "把验收标准写在编码之前"]
+    "highlights": ["一页式开发 brief", "自动列出关键不确定点", "把验收标准写在编码之前"]
   },
   {
     "id": "product-002",
     "slug": "skill-card-library",
     "name": "Skill Card Library",
     "subtitle": "把常用 AI 工作流沉淀成可复用 skill 卡片",
-    "description": "一个整理 skill、prompt、触发场景和输出格式的小型资料库。重点不是收藏提示词，而是让每个 skill 都有明确边界和验证方式。",
+    "description": "整理 skill、prompt、触发场景、输入要求和验证方式的小型资料库。重点不是收藏提示词，而是让每个 skill 都有明确边界和交付标准。",
     "status": "building",
     "year": "2026",
-    "tags": ["skill", "knowledge-base", "ai-workflow"],
+    "tags": ["skill", "knowledge-base", "prompt-system"],
     "links": {
       "demo": "",
       "repo": ""
     },
-    "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1400&q=80",
+    "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1400&q=82",
     "featured": true,
     "published": true,
-    "highlights": ["按场景组织 skill", "记录输入和输出契约", "支持复盘哪些 prompt 真有用"]
+    "highlights": ["按任务场景组织 skill", "记录输入和输出契约", "支持复盘哪些 prompt 真有用"]
   },
   {
     "id": "product-003",
-    "slug": "ship-log",
-    "name": "Ship Log",
-    "subtitle": "独立开发者的发布记录和复盘台",
-    "description": "轻量记录每次产品迭代，包括变更、截图、部署链接、失败原因和下一轮行动。让持续开发变成公开资产。",
-    "status": "idea",
+    "slug": "repo-cartographer",
+    "name": "Repo Cartographer",
+    "subtitle": "让 AI 改代码前先读懂项目地形",
+    "description": "一个代码库勘察 prompt 包，帮助模型在动手前输出入口文件、路由、状态、数据源、构建命令和风险面。适合接手陌生项目和做小范围重构。",
+    "status": "prototype",
     "year": "2026",
-    "tags": ["launch", "portfolio", "builder"],
+    "tags": ["code-review", "repo-map", "engineering"],
     "links": {
       "demo": "",
       "repo": ""
     },
-    "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80",
+    "image": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1400&q=82",
     "featured": true,
     "published": true,
-    "highlights": ["版本时间线", "发布后检查清单", "把复盘转成下一轮 brief"]
+    "highlights": ["先读结构再改代码", "标出高风险文件", "输出最小修改面建议"]
   },
   {
     "id": "product-004",
-    "slug": "domain-launch-kit",
-    "name": "Domain Launch Kit",
-    "subtitle": "个人域名上线检查清单",
-    "description": "聚合 DNS、Cloudflare、GitHub Pages、HTTPS、SEO 和内容发布检查，减少从本地作品到公网网站之间的摩擦。",
+    "slug": "launch-control-checklist",
+    "name": "Launch Control Checklist",
+    "subtitle": "独立开发者的上线前检查台",
+    "description": "聚合本地构建、路由回退、内容检查、SEO、DNS、HTTPS 和发布后验证。目标是把上线从凭感觉操作，变成一套能复用的检查动作。",
     "status": "launched",
     "year": "2026",
-    "tags": ["deployment", "dns", "github-pages"],
+    "tags": ["deployment", "dns", "github-pages", "ship"],
     "links": {
       "demo": "",
       "repo": ""
     },
-    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&q=80",
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&q=82",
     "featured": false,
     "published": true,
-    "highlights": ["DNS 传播检查", "HTTPS 状态跟踪", "静态站部署路径"]
+    "highlights": ["DNS 传播检查", "HTTPS 状态跟踪", "静态站二级路由验证"]
+  },
+  {
+    "id": "product-005",
+    "slug": "design-critic-prompt-pack",
+    "name": "Design Critic Prompt Pack",
+    "subtitle": "专门清除页面模板感的设计审稿包",
+    "description": "针对个人站、作品集和产品展示页的审稿 prompt。它会检查层级、留白、动效、文案、移动端和可访问性，帮助页面从普通模板走向更有辨识度的技术品牌。",
+    "status": "building",
+    "year": "2026",
+    "tags": ["frontend", "design-review", "taste"],
+    "links": {
+      "demo": "",
+      "repo": ""
+    },
+    "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=82",
+    "featured": false,
+    "published": true,
+    "highlights": ["识别 AI 默认审美", "检查移动端文本溢出", "给出可执行的设计修正"]
   }
 ]

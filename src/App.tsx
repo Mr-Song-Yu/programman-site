@@ -48,7 +48,7 @@ const ADMIN_CONFIG_KEY = "programman-github-config";
 const ADMIN_PIN_KEY = "programman-admin-pin";
 
 const navItems: NavItem[] = [
-  { href: "/blog", label: "Blog" },
+  { href: "/blog", label: "Journal" },
   { href: "/products", label: "Vibe Lab" },
 ];
 
@@ -57,7 +57,7 @@ const promptKits = [
     icon: Brain,
     title: "Brief Compressor",
     label: "需求压缩",
-    summary: "把一句模糊想法压成目标、用户、页面、数据、验收标准五件事。",
+    summary: "把一句模糊想法压成目标用户、核心任务、页面结构、数据边界和验收标准。",
     prompt:
       "请先把我的想法整理成开发 brief。输出目标用户、核心流程、页面结构、数据模型、风险点和验收标准。遇到不确定处只问一个最关键问题。",
     principle: "先约束问题，再生成代码。AI 写得快，但模糊 brief 会把速度变成返工。",
@@ -66,53 +66,74 @@ const promptKits = [
     icon: TerminalWindow,
     title: "Repo Cartographer",
     label: "代码勘察",
-    summary: "进入项目先画地图，找入口、依赖、状态流和危险边界。",
+    summary: "进入项目先画地图，找到入口、依赖、状态流、构建命令和可能破坏的边界。",
     prompt:
-      "请先阅读项目结构，不要改代码。找出主入口、路由、状态管理、数据来源、构建命令和最可能影响这次修改的文件。",
-    principle: "先让系统教你怎么动手。越熟悉现有边界，越少制造新复杂度。",
+      "请先阅读项目结构，不要改代码。找出主入口、路由、状态管理、数据来源、构建命令和这次修改最可能影响的文件。",
+    principle: "让系统先教你怎么动手。越熟悉现有边界，越少制造新的复杂度。",
   },
   {
     icon: Strategy,
     title: "Design Critic",
     label: "界面审稿",
-    summary: "专门识别页面里的模板感、视觉噪声和没有用途的装饰。",
+    summary: "识别页面里的模板感、视觉噪声、无用装饰、移动端风险和文案含混处。",
     prompt:
       "请从真实用户视角审查这个页面。指出层级、文案、留白、按钮状态、移动端和可访问性问题，只列会影响体验的改动。",
-    principle: "设计不是堆效果，而是让下一步动作更清楚、更值得信任。",
+    principle: "设计不是堆效果，而是让下一步动作更清晰、更可信、更值得点击。",
   },
   {
     icon: FlowArrow,
     title: "Ship Loop",
     label: "发布闭环",
-    summary: "把构建、测试、DNS、部署、复盘纳入同一条上线链路。",
+    summary: "把构建、预览、DNS、HTTPS、回滚和复盘纳入同一条上线链路。",
     prompt:
       "请把这次上线拆成检查清单。包含本地构建、路由、内容、SEO、DNS、HTTPS、回滚方案和发布后验证命令。",
-    principle: "发布不是最后一步。可验证、可回滚、可记录，才是一个完整产品动作。",
+    principle: "发布不是最后一步。可验证、可回滚、可记录，才是完整的产品动作。",
   },
 ];
 
-const methodSteps = [
+const operatingPrinciples = [
   {
     icon: FileText,
-    title: "01 先写任务边界",
-    text: "明确要做什么，也明确暂时不做什么。这样 prompt 不会变成愿望清单。",
+    title: "Context before code",
+    text: "每次编码前先读 brief、路由、数据和约束。真正高级的速度，不是少看上下文，而是少做错误假设。",
   },
   {
     icon: Stack,
-    title: "02 再读现有系统",
-    text: "让代码库的结构决定实现风格。复用已有模式，比新建抽象更可靠。",
+    title: "Small surface, strong loop",
+    text: "把大愿望切成能构建、能预览、能验证的小表面。每一轮都留下可运行结果。",
   },
   {
     icon: Cards,
-    title: "03 小步构建可见结果",
-    text: "每一轮都应该能跑、能看、能被验证。模糊灵感要尽快变成界面或命令输出。",
+    title: "Prompt as interface",
+    text: "prompt 不是口号，是人和模型之间的接口。它应该定义输入、边界、输出、失败处理和验收方式。",
   },
   {
     icon: ShieldCheck,
-    title: "04 最后补安全和发布检查",
-    text: "静态站也需要边界意识。管理入口、token 权限、DNS、HTTPS 都要有清楚的检查点。",
+    title: "Ship with receipts",
+    text: "构建日志、DNS 状态、HTTPS、截图和复盘都要被记录。上线后能解释，才算真的交付。",
   },
 ];
+
+const consoleLines = [
+  "read brief -> extract constraints",
+  "map repo -> identify safe edit surface",
+  "compose UI -> remove template smell",
+  "build -> browser verify -> deploy",
+];
+
+const stackSignals = [
+  { label: "Host", value: "GitHub Pages" },
+  { label: "Domain", value: site.domain },
+  { label: "CMS", value: "GitHub Contents API" },
+  { label: "Motion", value: "CSS + IntersectionObserver" },
+];
+
+const statusLabels: Record<Product["status"], string> = {
+  idea: "idea",
+  prototype: "prototype",
+  building: "building",
+  launched: "launched",
+};
 
 const emptyPost = (): BlogPost => ({
   id: uid("post"),
@@ -184,7 +205,7 @@ function useRouteMeta(route: Route) {
   useEffect(() => {
     const titles: Record<Route["name"], string> = {
       home: "Programman",
-      blog: "Programman Blog",
+      blog: "Programman Journal",
       post: "Programman Article",
       products: "Programman Vibe Lab",
       admin: "Programman Studio",
@@ -200,6 +221,35 @@ function useRouteMeta(route: Route) {
     }
     robots.content = route.name === "admin" ? "noindex,nofollow" : "index,follow";
   }, [route.name]);
+}
+
+function useRevealOnScroll(trigger: string) {
+  useEffect(() => {
+    document.documentElement.classList.add("reveal-ready");
+    const nodes = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+    const markVisible = (node: HTMLElement) => {
+      const rect = node.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) {
+        node.classList.add("is-visible");
+      }
+    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          }
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.16 },
+    );
+
+    nodes.forEach((node) => {
+      markVisible(node);
+      observer.observe(node);
+    });
+    return () => observer.disconnect();
+  }, [trigger]);
 }
 
 function Link({
@@ -265,7 +315,7 @@ function Shell({
           <strong>{site.name}</strong>
           <span>{site.domain}</span>
         </div>
-        <span>Vibe-coding notes, prompt systems, and small products.</span>
+        <span>Vibe-coding notes, prompt systems, launch logs, and small products.</span>
       </footer>
     </>
   );
@@ -308,64 +358,90 @@ function HomePage({
 
   return (
     <>
-      <section className="hero-section">
+      <section className="hero-section" data-reveal>
         <div className="hero-copy">
-          <p className="kicker">Vibe-coding studio</p>
-          <h1>把想法变成可运行的产品，再把过程写成方法。</h1>
+          <p className="kicker">Programman Operating Journal</p>
+          <h1>为 AI 时代写软件，也写清楚如何写。</h1>
           <p>
-            Programman 记录 AI 辅助开发、prompt 设计、前端审美、部署清单和个人产品实验。
+            这里不是普通作品集，而是一张公开工作台：记录 prompt 如何变成接口、代码如何被验证、页面如何上线，以及一个高级程序员怎样把模糊想法压成可交付产品。
           </p>
           <div className="hero-actions">
             <Link href="/products" navigate={navigate} className="button primary">
               进入 Vibe Lab <ArrowRight weight="bold" />
             </Link>
             <Link href="/blog" navigate={navigate} className="button secondary">
-              阅读笔记 <BookOpenText weight="bold" />
+              阅读工程日志 <BookOpenText weight="bold" />
             </Link>
           </div>
         </div>
-        <div className="hero-board" aria-label="vibe-coding 工作流">
-          <div className="board-visual">
+
+        <div className="operator-board" aria-label="Programman 工作台预览">
+          <div className="console-card">
+            <div className="console-top">
+              <span>programman.run</span>
+              <span>live loop</span>
+            </div>
+            <div className="console-lines">
+              {consoleLines.map((line, index) => (
+                <div className="console-line" key={line} style={{ animationDelay: `${index * 180}ms` }}>
+                  <span className="pulse-dot" />
+                  <code>{line}</code>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="hero-image">
             <img
-              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1500&q=82"
-              alt="打开代码编辑器的开发工作台"
+              src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1500&q=82"
+              alt="深色代码编辑器中的工程工作台"
             />
           </div>
-          <div className="board-panel board-panel-main">
-            <span>Operating loop</span>
-            <strong>brief / build / verify / publish</strong>
-          </div>
-          <div className="board-panel board-panel-side">
+          <div className="floating-spec">
             <Code weight="bold" />
-            <span>Static first</span>
+            <span>static-first, content-managed, DNS-verified</span>
           </div>
         </div>
       </section>
 
-      <section className="metric-strip" aria-label="站点内容统计">
-        <div>
-          <strong>{posts.length}</strong>
-          <span>public notes</span>
+      <section className="signal-strip" aria-label="站点能力信号" data-reveal>
+        {stackSignals.map((signal) => (
+          <div key={signal.label}>
+            <span>{signal.label}</span>
+            <strong>{signal.value}</strong>
+          </div>
+        ))}
+      </section>
+
+      <section className="page-section operating-section" data-reveal>
+        <div className="section-heading stacked">
+          <p className="kicker">Operating system</p>
+          <h2>高级程序员的博客，应该展示判断力，而不只是展示结果。</h2>
+          <p>
+            每篇文章、每个 prompt、每个小产品，都围绕同一件事：把不确定性拆小，把工程动作做实，把发布结果留下证据。
+          </p>
         </div>
-        <div>
-          <strong>{products.length}</strong>
-          <span>lab products</span>
-        </div>
-        <div>
-          <strong>{promptKits.length}</strong>
-          <span>prompt systems</span>
-        </div>
-        <div>
-          <strong>0</strong>
-          <span>server required</span>
+        <div className="principle-grid">
+          {operatingPrinciples.map((item) => (
+            <article className="principle-card" key={item.title}>
+              <span className="icon-badge">
+                <item.icon weight="bold" />
+              </span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
         </div>
       </section>
 
-      <section className="page-section lab-section">
-        <div className="section-heading stacked">
-          <p className="kicker">Prompt systems</p>
-          <h2>把 vibe-coding 变稳的四套 prompt</h2>
-          <p>它们不是咒语，而是工作流接口。每一条都服务于更清楚的输入、更小的返工和更快的验证。</p>
+      <section className="page-section prompt-section" data-reveal>
+        <div className="section-heading inline-heading">
+          <div>
+            <p className="kicker">Prompt systems</p>
+            <h2>把 vibe-coding 变稳的四套 prompt。</h2>
+          </div>
+          <p>
+            它们不是咒语，而是工作流接口。每一条都服务于更清晰的输入、更小的返工和更快的验证。
+          </p>
         </div>
         <div className="prompt-grid">
           {promptKits.map((kit) => (
@@ -374,32 +450,11 @@ function HomePage({
         </div>
       </section>
 
-      <section className="page-section split-method">
-        <div className="method-intro">
-          <p className="kicker">Design principle</p>
-          <h2>先设计判断，再设计页面。</h2>
-          <p>
-            一个好的 AI 开发流程，不是让模型连续输出更多代码，而是持续缩小不确定性。
-          </p>
-        </div>
-        <div className="method-stack">
-          {methodSteps.map((step) => (
-            <div className="method-row" key={step.title}>
-              <step.icon weight="bold" />
-              <div>
-                <h3>{step.title}</h3>
-                <p>{step.text}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="page-section">
+      <section className="page-section" data-reveal>
         <div className="section-heading inline-heading">
           <div>
             <p className="kicker">Product shelf</p>
-            <h2>可复用的 vibe-coding 小产品</h2>
+            <h2>有方法论的 vibe-coding 小产品。</h2>
           </div>
           <Link href="/products" navigate={navigate} className="text-link">
             查看全部 <ArrowRight weight="bold" />
@@ -412,11 +467,11 @@ function HomePage({
         </div>
       </section>
 
-      <section className="page-section">
+      <section className="page-section writing-section" data-reveal>
         <div className="section-heading inline-heading">
           <div>
             <p className="kicker">Latest writing</p>
-            <h2>最近的开发笔记</h2>
+            <h2>最近的工程日志。</h2>
           </div>
           <Link href="/blog" navigate={navigate} className="text-link">
             所有文章 <ArrowRight weight="bold" />
@@ -432,11 +487,7 @@ function HomePage({
   );
 }
 
-function PromptKitCard({
-  kit,
-}: {
-  kit: (typeof promptKits)[number];
-}) {
+function PromptKitCard({ kit }: { kit: (typeof promptKits)[number] }) {
   return (
     <article className="prompt-card">
       <div className="prompt-card-top">
@@ -468,7 +519,7 @@ function ArticleCard({
       <div className="article-body">
         <div className="meta-row">
           <time dateTime={post.date}>{post.date}</time>
-          <span>{post.readingMinutes} min</span>
+          <span>{post.readingMinutes} min read</span>
         </div>
         <h3>
           <Link href={`/blog/${post.slug}`} navigate={navigate}>
@@ -495,11 +546,16 @@ function ProductCard({ product }: { product: Product }) {
       <div className="product-content">
         <div className="meta-row">
           <span>{product.year}</span>
-          <span>{product.status}</span>
+          <span>{statusLabels[product.status]}</span>
         </div>
         <h3>{product.name}</h3>
         <p className="product-subtitle">{product.subtitle}</p>
         <p>{product.description}</p>
+        <div className="tag-row">
+          {product.tags.slice(0, 4).map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
+        </div>
         <ul>
           {product.highlights.map((highlight) => (
             <li key={highlight}>
@@ -531,15 +587,42 @@ function BlogPage({
   posts: BlogPost[];
   navigate: (href: string) => void;
 }) {
+  const lead = posts[0];
+  const rest = posts.slice(1);
+
   return (
-    <section className="page-section first-section">
+    <section className="page-section first-section" data-reveal>
       <div className="section-heading stacked page-intro">
-        <p className="kicker">Blog</p>
-        <h1>开发笔记、prompt 设计和发布复盘</h1>
-        <p>记录从模糊需求到上线页面的过程，也保留那些下次能直接复用的判断。</p>
+        <p className="kicker">Journal</p>
+        <h1>工程日志、prompt 设计和发布复盘。</h1>
+        <p>
+          这里写的不是流水账，而是可迁移的判断：怎样读项目、怎样压缩需求、怎样让 AI 参与开发又不失控。
+        </p>
       </div>
+      {lead ? (
+        <article className="lead-article">
+          <Link href={`/blog/${lead.slug}`} navigate={navigate} className="lead-image">
+            <img src={lead.cover} alt={lead.title} />
+          </Link>
+          <div>
+            <div className="meta-row">
+              <time dateTime={lead.date}>{lead.date}</time>
+              <span>{lead.readingMinutes} min read</span>
+            </div>
+            <h2>
+              <Link href={`/blog/${lead.slug}`} navigate={navigate}>
+                {lead.title}
+              </Link>
+            </h2>
+            <p>{lead.excerpt}</p>
+            <Link href={`/blog/${lead.slug}`} navigate={navigate} className="text-link">
+              阅读这篇 <ArrowRight weight="bold" />
+            </Link>
+          </div>
+        </article>
+      ) : null}
       <div className="post-index roomy">
-        {posts.map((post) => (
+        {rest.map((post) => (
           <ArticleCard key={post.id} post={post} navigate={navigate} />
         ))}
       </div>
@@ -559,18 +642,18 @@ function PostPage({
   }
 
   return (
-    <article className="article-page">
+    <article className="article-page" data-reveal>
       <div className="article-hero">
         <div>
           <Link href="/blog" navigate={navigate} className="back-link">
-            <ArrowRight /> 返回博客
+            <ArrowRight /> 返回日志
           </Link>
           <h1>{post.title}</h1>
           <p>{post.excerpt}</p>
           <div className="meta-row">
             <time dateTime={post.date}>{post.date}</time>
             <span>{post.author}</span>
-            <span>{post.readingMinutes} min</span>
+            <span>{post.readingMinutes} min read</span>
           </div>
         </div>
         <img src={post.cover} alt={post.title} />
@@ -583,24 +666,44 @@ function PostPage({
 function ProductsPage({ products }: { products: Product[] }) {
   return (
     <>
-      <section className="page-section first-section product-hero">
+      <section className="page-section first-section product-hero" data-reveal>
         <div className="section-heading stacked page-intro">
           <p className="kicker">Vibe Lab</p>
-          <h1>有用的 skill、prompt 和小产品原型</h1>
-          <p>这里展示的不只是工具名称，而是背后的使用场景、设计思路和可迁移方法。</p>
+          <h1>有用的 skill、prompt 和小产品原型。</h1>
+          <p>
+            展示重点不是工具名，而是使用场景、设计思路、验证方式和可迁移方法。每个产品都应该帮下一次开发少踩一个坑。
+          </p>
+        </div>
+        <div className="lab-manifest">
+          <div>
+            <span>01</span>
+            <strong>Skill</strong>
+            <p>沉淀一类任务的判断标准。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>Prompt</strong>
+            <p>定义输入、边界和输出契约。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>Product</strong>
+            <p>把工作流变成可复用界面。</p>
+          </div>
         </div>
       </section>
-      <section className="page-section no-top-padding">
+      <section className="page-section no-top-padding" data-reveal>
         <div className="product-list">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
       </section>
-      <section className="page-section lab-section">
+      <section className="page-section prompt-section" data-reveal>
         <div className="section-heading stacked">
           <p className="kicker">Prompt library</p>
-          <h2>可以直接复制改造的 prompt 设计</h2>
+          <h2>可以直接复制改造的 prompt 设计。</h2>
+          <p>每一条都带着设计原理，帮助你判断什么时候用、怎样改、失败时该看哪里。</p>
         </div>
         <div className="prompt-grid">
           {promptKits.map((kit) => (
@@ -670,7 +773,7 @@ function AdminGate({ children }: { children: ReactNode }) {
         <p className="kicker">Private studio</p>
         <h1>{hasLocalPin ? "解锁内容管理台" : "设置本地管理口令"}</h1>
         <p>
-          管理台已从公开导航移除，并禁止搜索索引。静态站无法提供服务端鉴权，真正的写入权限仍由 GitHub token 控制。
+          管理台已经从公开导航移除，并禁止搜索索引。静态站无法提供真正的服务端鉴权，写入权限仍由 GitHub token 控制。
         </p>
         <div className="gate-form">
           <label>
@@ -1142,6 +1245,7 @@ export function App() {
   const { publicPosts, publicProducts, posts, products, state, error } = useContent();
 
   useRouteMeta(route);
+  useRevealOnScroll(`${path}:${state}:${publicPosts.length}:${publicProducts.length}`);
 
   const post = useMemo(
     () => publicPosts.find((item) => item.slug === route.slug),
