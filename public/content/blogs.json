@@ -1,0 +1,28 @@
+[
+  {
+    "id": "post-001",
+    "slug": "first-vibe-coding-lab",
+    "title": "第一间 vibe-coding 实验室",
+    "excerpt": "把一个模糊想法拆成可以运行的页面、脚本和产品原型，是我最喜欢的工作流。",
+    "content": "## 为什么开始记录\n\nvibe-coding 最迷人的地方，是它把想法和可运行的软件之间的距离压得很短。这个博客会记录我的实验、踩坑、复盘和产品化尝试。\n\n## 我会写什么\n\n- 从零构建的小工具\n- AI 辅助开发的真实工作流\n- 前端设计、部署和自动化笔记\n- 值得展示的 coding 产品\n\n```ts\nconst idea = \"ship something useful\";\nconst loop = [\"think\", \"build\", \"test\", \"write\"];\n```\n\n我希望这里不是一个静态作品墙，而是一条持续变亮的开发轨迹。",
+    "author": "Programman",
+    "date": "2026-05-31",
+    "tags": ["vibe-coding", "workflow", "notes"],
+    "published": true,
+    "cover": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1400&q=80",
+    "readingMinutes": 3
+  },
+  {
+    "id": "post-002",
+    "slug": "static-site-with-admin",
+    "title": "不用服务器，也能有一个可管理的博客",
+    "excerpt": "GitHub Pages 负责托管，GitHub API 负责内容更新，前端管理页负责编辑体验。",
+    "content": "## 核心想法\n\n这个站点不需要传统服务器。公开页面从 JSON 内容文件读取数据，管理页通过 GitHub Contents API 更新这些文件，然后由 GitHub Actions 自动重新部署。\n\n## 适合什么场景\n\n- 个人博客\n- 产品展示页\n- 小型资料库\n- 不需要多人协作审批的内容站\n\n## 注意事项\n\nGitHub token 只应该放在自己的浏览器里。建议使用 fine-grained token，并且只授权这个仓库的 Contents 读写权限。",
+    "author": "Programman",
+    "date": "2026-05-31",
+    "tags": ["github-pages", "cms", "deployment"],
+    "published": true,
+    "cover": "https://images.unsplash.com/photo-1556075798-4825dfaaf498?auto=format&fit=crop&w=1400&q=80",
+    "readingMinutes": 4
+  }
+]

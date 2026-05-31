@@ -1,0 +1,56 @@
+[
+  {
+    "id": "product-001",
+    "slug": "prompt-brief-studio",
+    "name": "Prompt Brief Studio",
+    "subtitle": "把零散需求整理成可执行开发 brief 的小工具",
+    "description": "面向 vibe-coding 的需求整理器，帮助把想法、约束、页面结构和验收标准一次性梳理清楚。",
+    "status": "prototype",
+    "year": "2026",
+    "tags": ["brief", "ai-workflow", "frontend"],
+    "links": {
+      "demo": "",
+      "repo": ""
+    },
+    "image": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80",
+    "featured": true,
+    "published": true,
+    "highlights": ["结构化需求输入", "自动生成页面骨架", "适合个人项目启动"]
+  },
+  {
+    "id": "product-002",
+    "slug": "ship-log",
+    "name": "Ship Log",
+    "subtitle": "为独立开发者准备的发布记录看板",
+    "description": "轻量记录每次产品迭代，包括功能、截图、发布链接和复盘，适合把持续开发变成公开资产。",
+    "status": "idea",
+    "year": "2026",
+    "tags": ["log", "portfolio", "builder"],
+    "links": {
+      "demo": "",
+      "repo": ""
+    },
+    "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80",
+    "featured": true,
+    "published": true,
+    "highlights": ["时间线展示", "版本复盘", "可嵌入作品集"]
+  },
+  {
+    "id": "product-003",
+    "slug": "domain-launch-kit",
+    "name": "Domain Launch Kit",
+    "subtitle": "个人域名上线检查清单",
+    "description": "聚合 DNS、GitHub Pages、HTTPS、SEO 和内容发布检查，减少从本地作品到公网网站之间的摩擦。",
+    "status": "building",
+    "year": "2026",
+    "tags": ["deployment", "dns", "checklist"],
+    "links": {
+      "demo": "",
+      "repo": ""
+    },
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&q=80",
+    "featured": false,
+    "published": true,
+    "highlights": ["DNS 检查", "Pages 部署", "HTTPS 状态跟踪"]
+  }
+]
