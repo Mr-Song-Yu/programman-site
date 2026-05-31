@@ -23,6 +23,8 @@ import {
   ShieldCheck,
   Stack,
   Strategy,
+  Moon,
+  Sun,
   TerminalWindow,
   Trash,
 } from "@phosphor-icons/react";
@@ -38,6 +40,8 @@ type Route = {
   slug?: string;
 };
 
+type Theme = "light" | "dark";
+
 type NavItem = {
   href: string;
   label: string;
@@ -46,6 +50,7 @@ type NavItem = {
 const ADMIN_UNLOCK_KEY = "programman-admin-unlocked";
 const ADMIN_CONFIG_KEY = "programman-github-config";
 const ADMIN_PIN_KEY = "programman-admin-pin";
+const THEME_KEY = "programman-theme";
 
 const navItems: NavItem[] = [
   { href: "/blog", label: "Journal" },
@@ -223,6 +228,28 @@ function useRouteMeta(route: Route) {
   }, [route.name]);
 }
 
+function getInitialTheme(): Theme {
+  const saved = localStorage.getItem(THEME_KEY);
+  if (saved === "light" || saved === "dark") return saved;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function useTheme() {
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    localStorage.setItem(THEME_KEY, theme);
+  }, [theme]);
+
+  const toggleTheme = useCallback(() => {
+    setTheme((current) => (current === "dark" ? "light" : "dark"));
+  }, []);
+
+  return { theme, toggleTheme };
+}
+
 function useRevealOnScroll(trigger: string) {
   useEffect(() => {
     document.documentElement.classList.add("reveal-ready");
@@ -282,10 +309,14 @@ function Shell({
   children,
   navigate,
   path,
+  theme,
+  toggleTheme,
 }: {
   children: ReactNode;
   navigate: (href: string) => void;
   path: string;
+  theme: Theme;
+  toggleTheme: () => void;
 }) {
   return (
     <>
@@ -296,18 +327,29 @@ function Shell({
           </span>
           <span>{site.name}</span>
         </Link>
-        <nav className="site-nav" aria-label="主导航">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              navigate={navigate}
-              className={path === item.href ? "active" : ""}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <div className="header-actions">
+          <nav className="site-nav" aria-label="主导航">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                navigate={navigate}
+                className={path === item.href ? "active" : ""}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <button
+            className="theme-toggle"
+            type="button"
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "切换到白天主题" : "切换到黑夜主题"}
+            title={theme === "dark" ? "切换到白天主题" : "切换到黑夜主题"}
+          >
+            {theme === "dark" ? <Sun weight="bold" /> : <Moon weight="bold" />}
+          </button>
+        </div>
       </header>
       <main>{children}</main>
       <footer className="site-footer">
@@ -484,6 +526,160 @@ function HomePage({
         </div>
       </section>
     </>
+  );
+}
+
+function BlogHomePage({
+  posts,
+  products,
+  navigate,
+}: {
+  posts: BlogPost[];
+  products: Product[];
+  navigate: (href: string) => void;
+}) {
+  const lead = posts[0];
+  const rest = posts.slice(1, 5);
+  const columnProducts = products.slice(0, 5);
+
+  return (
+    <section className="journal-home" data-reveal>
+      <div className="home-intro">
+        <p className="kicker">Programman Journal</p>
+        <h1>一个程序员的博客、产品实验和 AI 编程笔记。</h1>
+        <p>
+          这里以文章为主线：记录工程判断、prompt 设计、上线复盘和 vibe coding 产品实验。文章可以继续阅读，产品放在独立专栏里作为长期迭代的目录。
+        </p>
+      </div>
+
+      <div className="home-columns">
+        <section className="blog-column" aria-labelledby="home-blog-heading">
+          <div className="column-heading">
+            <div>
+              <span className="section-label">Blog articles</span>
+              <h2 id="home-blog-heading">博客文章</h2>
+            </div>
+            <Link href="/blog" navigate={navigate} className="text-link">
+              查看全部 <ArrowRight weight="bold" />
+            </Link>
+          </div>
+
+          {lead ? <FeaturedArticle post={lead} navigate={navigate} /> : null}
+
+          <div className="article-list">
+            {rest.map((post) => (
+              <ArticleListItem key={post.id} post={post} navigate={navigate} />
+            ))}
+          </div>
+        </section>
+
+        <aside className="product-column" aria-labelledby="home-product-heading">
+          <div className="column-heading compact">
+            <div>
+              <span className="section-label">Vibe coding</span>
+              <h2 id="home-product-heading">产品专栏</h2>
+            </div>
+            <Link href="/products" navigate={navigate} className="text-link">
+              Vibe Lab <ArrowRight weight="bold" />
+            </Link>
+          </div>
+
+          <div className="product-column-note">
+            <RocketLaunch weight="bold" />
+            <p>这些不是一次性作品，而是把 prompt、skill、发布清单和设计判断产品化的实验。</p>
+          </div>
+
+          <div className="product-rail">
+            {columnProducts.map((product) => (
+              <ProductRailItem key={product.id} product={product} navigate={navigate} />
+            ))}
+          </div>
+        </aside>
+      </div>
+    </section>
+  );
+}
+
+function FeaturedArticle({
+  post,
+  navigate,
+}: {
+  post: BlogPost;
+  navigate: (href: string) => void;
+}) {
+  return (
+    <article className="featured-article">
+      <Link href={`/blog/${post.slug}`} navigate={navigate} className="featured-article-image">
+        <img src={post.cover} alt={post.title} />
+      </Link>
+      <div className="featured-article-body">
+        <div className="meta-row">
+          <time dateTime={post.date}>{post.date}</time>
+          <span>{post.readingMinutes} min read</span>
+        </div>
+        <h3>
+          <Link href={`/blog/${post.slug}`} navigate={navigate}>
+            {post.title}
+          </Link>
+        </h3>
+        <p>{post.excerpt}</p>
+        <Link href={`/blog/${post.slug}`} navigate={navigate} className="read-more">
+          阅读全文 <ArrowRight weight="bold" />
+        </Link>
+      </div>
+    </article>
+  );
+}
+
+function ArticleListItem({
+  post,
+  navigate,
+}: {
+  post: BlogPost;
+  navigate: (href: string) => void;
+}) {
+  return (
+    <article className="article-list-item">
+      <Link href={`/blog/${post.slug}`} navigate={navigate}>
+        <div className="meta-row">
+          <time dateTime={post.date}>{post.date}</time>
+          <span>{post.readingMinutes} min read</span>
+        </div>
+        <h3>{post.title}</h3>
+        <p>{post.excerpt}</p>
+        <div className="tag-row">
+          {post.tags.slice(0, 3).map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
+        </div>
+      </Link>
+    </article>
+  );
+}
+
+function ProductRailItem({
+  product,
+  navigate,
+}: {
+  product: Product;
+  navigate: (href: string) => void;
+}) {
+  return (
+    <article className="product-rail-item">
+      <Link href="/products" navigate={navigate}>
+        <div className="product-rail-top">
+          <span>{statusLabels[product.status]}</span>
+          <span>{product.year}</span>
+        </div>
+        <h3>{product.name}</h3>
+        <p>{product.subtitle}</p>
+        <div className="tag-row">
+          {product.tags.slice(0, 2).map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
+        </div>
+      </Link>
+    </article>
   );
 }
 
@@ -1243,6 +1439,7 @@ function EmptyEditor() {
 export function App() {
   const { route, navigate, path } = useRouter();
   const { publicPosts, publicProducts, posts, products, state, error } = useContent();
+  const { theme, toggleTheme } = useTheme();
 
   useRouteMeta(route);
   useRevealOnScroll(`${path}:${state}:${publicPosts.length}:${publicProducts.length}`);
@@ -1259,7 +1456,7 @@ export function App() {
   } else if (state === "error") {
     page = <ErrorBlock error={error} />;
   } else if (route.name === "home") {
-    page = <HomePage posts={publicPosts} products={publicProducts} navigate={navigate} />;
+    page = <BlogHomePage posts={publicPosts} products={publicProducts} navigate={navigate} />;
   } else if (route.name === "blog") {
     page = <BlogPage posts={publicPosts} navigate={navigate} />;
   } else if (route.name === "post") {
@@ -1273,7 +1470,7 @@ export function App() {
   }
 
   return (
-    <Shell navigate={navigate} path={path}>
+    <Shell navigate={navigate} path={path} theme={theme} toggleTheme={toggleTheme}>
       {page}
     </Shell>
   );
