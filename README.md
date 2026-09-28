@@ -1,39 +1,22 @@
-# Programman
+# 去泰国 · Thailand, here we go
 
-Programman 是一个纯静态的个人博客和 vibe-coding 产品展示站点。
+根据用户提供的「泰国旅行-资料」整理的旅行攻略，暂时使用 https://programman.dpdns.org/。
 
-## 功能
+包含 4–8 日行程时间线、交通提醒、美食收藏、商品抠图与原图、可保存的购物和行李清单。支持手机、明暗主题和打印。原始资料未注明月份、年份、航班或酒店，页面不将建议时间表述为预订信息。
 
-- 公开博客列表、博客详情和产品展示页。
-- `/admin` 管理页面，可新增、编辑、删除博客和产品。入口不出现在公开导航，并带有本地口令遮罩。
-- 管理页通过 GitHub Contents API 直接更新仓库里的 JSON 内容文件。
-- GitHub Pages 自动部署，不需要服务器。
-- 自定义域名：`programman.dpdns.org`。
+## 开发与发布
 
-## 本地开发
-
-```bash
-npm install
+```sh
+npm ci
 npm run dev
+npm run build
+npm run preview
 ```
 
-## 发布流程
+推送到 main 后，由现有 GitHub Actions 工作流构建并发布到 GitHub Pages。自定义域名在 public/CNAME 中。
 
-1. 创建 GitHub 仓库并推送本项目。
-2. 在 GitHub 仓库 Settings -> Pages 中选择 GitHub Actions。
-3. 将 `programman.dpdns.org` 添加为自定义域名并启用 HTTPS。
-4. 在 `dash.domain.digitalplat.org` 为 `programman.dpdns.org` 添加 CNAME，指向你的 GitHub Pages 默认域名：`你的用户名.github.io`。
-5. 访问 `/admin`，先设置本地管理口令，再填入仓库 owner、repo、branch 和 GitHub token 后发布内容。
+资料核对和图片说明见 [research/README.md](research/README.md)。清单仅保存在当前浏览器。
 
-## 管理页安全说明
+## 恢复原站
 
-这是一个纯静态网站，不能提供真正的服务端登录系统。`/admin` 的本地口令用于减少误访问和公开暴露，真正的写入权限由 GitHub token 决定。请使用 fine-grained token，只授权这个仓库的 Contents 读写权限。
-
-## GitHub token 权限
-
-建议使用 fine-grained personal access token，仅授权目标仓库，并开启：
-
-- Contents: Read and write
-- Metadata: Read-only
-
-token 只保存在当前浏览器，不会写入仓库。
+原站提交为 4ef982512bb7eae5148282aab2a95399c0b4aefe，本地备份分支为 archive/programman-before-thailand-20260928。恢复时可回退此次页面变更并重新部署。
