@@ -64,22 +64,33 @@ export const foodGroups = [
   ] },
 ];
 
-export const products = [
-  { id: 'smooto', name: 'Smooto 番茄系列', en: 'TOMATO TRAVEL POUCH', type: '护肤彩妆', price: '39–49 ฿', note: '番茄啫喱与 BB / CC 小袋装，认准不同版本。', sprite: 0, source: '20260928142730' },
-  { id: 'garnier', name: 'Garnier VC 系列', en: 'VITAMIN C', type: '护肤彩妆', price: '价格待看', note: '精华、面膜、洗面奶与卸妆水，按需要选。', sprite: 1, source: '20260928142808' },
+export type Product = { id: string; name: string; en: string; type: string; price: string; note: string; sprite: number | null; sheet?: string; source: string };
+export const products: Product[] = [
+  { id: 'smooto', name: 'Smooto 番茄啫喱', en: 'TOMATO SOOTHING GEL', type: '护肤彩妆', price: '49 ฿', note: '粉色番茄图案小袋装，与 BB / CC 款分别收藏。', sprite: 0, source: '20260928142730' },
+  { id: 'smooto-bbcc', name: 'Smooto BB / CC 霜', en: 'TOMATO BB + CC', type: '护肤彩妆', price: '39 ฿', note: '白红色番茄小袋装，色号与版本按实物核对。', sprite: 0, sheet: 'products-a', source: '20260928142730' },
+  { id: 'garnier-mask', name: 'Garnier VC 面膜', en: 'VITAMIN C SERUM MASK', type: '护肤彩妆', price: '价格待看', note: '黄色独立片装面膜，原笔记的面膜收藏。', sprite: 1, sheet: 'products-a', source: '20260928142753' },
+  { id: 'garnier-wash', name: 'Garnier VC 洗面奶', en: 'VITAMIN C FACE WASH', type: '护肤彩妆', price: '价格待看', note: '白色软管、黄色瓶盖；小样与正装容量不同。', sprite: 2, sheet: 'products-a', source: '20260928142753' },
+  { id: 'garnier-micellar', name: 'Garnier VC 卸妆水', en: 'MICELLAR CLEANSING WATER', type: '护肤彩妆', price: '价格待看', note: '透明瓶身、黄色翻盖，与洗面奶分开列出。', sprite: 3, sheet: 'products-a', source: '20260928142753' },
+  { id: 'garnier', name: 'Garnier VC 精华', en: 'VITAMIN C SERUM', type: '护肤彩妆', price: '价格待看', note: '银白色小袋装、橙色标签，选购时核对版本。', sprite: 1, source: '20260928142808' },
+  { id: 'vitc-collagen', name: 'VC + 胶原蛋白精华', en: 'VITAMIN C & COLLAGEN', type: '护肤彩妆', price: '价格待看', note: '橙白色 2 in 1 小袋装；原图未清晰标明英文品牌。', sprite: 0, sheet: 'products-b', source: '20260928142808' },
+  { id: 'clear-gel', name: 'Clear Nose 凝胶', en: 'ACNE CARE GEL', type: '护肤彩妆', price: '49 ฿', note: '绿色标签款，原笔记称祛痘凝胶；按包装说明使用。', sprite: 1, sheet: 'products-b', source: '20260928142808' },
+  { id: 'clear-hya', name: 'Clear Nose HYA 精华', en: 'HYA SERUM', type: '护肤彩妆', price: '49 ฿', note: '紫色标签款，原笔记中的淡斑亮肤精华。', sprite: 2, sheet: 'products-b', source: '20260928142808' },
+  { id: 'clear-sun', name: 'Clear Nose 防晒霜', en: 'UV SUNSCREEN', type: '护肤彩妆', price: '49 ฿', note: '蓝色标签款；防晒指数与使用方式以包装为准。', sprite: 3, sheet: 'products-b', source: '20260928142808' },
+  { id: 'clear-vitc', name: 'Clear Nose VC 精华', en: 'VITAMIN C SERUM', type: '护肤彩妆', price: '49 ฿', note: '橙色标签款，与紫色 HYA 精华分别列出。', sprite: 4, sheet: 'products-b', source: '20260928142808' },
   { id: 'merrezca', name: 'Merrez’ca 粉底液', en: 'SKIN UP FOUNDATION', type: '护肤彩妆', price: '59 ฿', note: '小袋装方便携带，先确认适合自己的色号。', sprite: 2, source: '20260928142814' },
+  { id: 'nivea', name: 'Nivea C&E 身体乳', en: 'C & E BODY LOTION', type: '日常补给', price: '24.8 ฿', note: '原笔记标注 Nivea VC+VE，白橙色软管装。', sprite: 4, sheet: 'products-a', source: '20260928142800' },
+  { id: 'vaseline', name: 'Vaseline Gluta-Hya 身体乳', en: 'GLUTA-HYA BODY LOTION', type: '日常补给', price: '32 ฿', note: '蓝绿色软管、金色图案，核对容量后再购买。', sprite: 5, sheet: 'products-a', source: '20260928142800' },
+  { id: 'dentiste', name: 'Dentiste 牙膏', en: 'DAILY FRESHNESS', type: '日常补给', price: '95 ฿', note: '绿色包装牙膏，容量与版本按实物核对。', sprite: 5, source: '20260928142814' },
+  { id: 'rasyan', name: 'Rasyan 丁香牙膏', en: 'HERBAL CLOVE TOOTHPASTE', type: '日常补给', price: '价格待看', note: '粉绿盒装；原笔记称牙粉，包装写 Herbal Clove Toothpaste。', sprite: 5, sheet: 'products-b', source: '20260928142820' },
+  { id: 'teeth-strips', name: '美白牙贴 · 品牌待定', en: 'ON THE WISHLIST', type: '日常补给', price: '价格待看', note: '原笔记只提到品类，没有品牌或配图；留在清单里到店确认。', sprite: null, source: '20260928142814' },
   { id: 'snake', name: '蛇牌清凉喷雾', en: 'SNAKE BRAND', type: '日常补给', price: '价格待看', note: '原笔记收藏经典款白色喷雾瓶。', sprite: 3, source: '20260928142820' },
   { id: 'soffell', name: 'Soffell 驱蚊喷雾', en: 'TRAVEL ESSENTIAL', type: '日常补给', price: '价格待看', note: '粉色喷头、绿色标签，小瓶装便于随身带。', sprite: 4, source: '20260928142827' },
-  { id: 'dentiste', name: 'Dentiste 牙膏', en: 'DAILY FRESHNESS', type: '日常补给', price: '95 ฿', note: '绿色包装牙膏，容量与版本按实物核对。', sprite: 5, source: '20260928142814' },
-];
-
-export const extraProducts = [
-  ['Nivea / Vaseline 身体乳', '笔记参考 24.8 / 32 ฿', '20260928142800'],
-  ['Clear Nose 系列', '笔记参考 49 ฿ / 袋', '20260928142808'],
-  ['Dentiste 牙膏 / Rasyan 牙粉', 'Dentiste 笔记参考 95 ฿', '20260928142814'],
-  ['虎牌贴布 / 青草膏', '给妈妈的收藏，选购前看包装说明', '20260928142827'],
-  ['RABEN 香皂', '原笔记写香茅皂，图片包装为 Ginger Soap，选购时核对', '20260928142833'],
-  ['BSC Falless 洗护', '青柠系列洗发水与头皮护理液', '20260928142838'],
+  { id: 'tiger-cool', name: '虎牌贴布 · 清凉款', en: 'TIGER BALM COOL', type: '日常补给', price: '价格待看', note: '黄色包装、绿色横条，给妈妈的收藏之一。', sprite: 0, sheet: 'products-c', source: '20260928142827' },
+  { id: 'tiger-warm', name: '虎牌贴布 · 温感款', en: 'TIGER BALM WARM', type: '日常补给', price: '价格待看', note: '黄色包装、红色横条；与清凉款区分，按说明选用。', sprite: 1, sheet: 'products-c', source: '20260928142827' },
+  { id: 'herbal-balm', name: '卧佛青草膏', en: 'THAI HERBAL BALM', type: '日常补给', price: '价格待看', note: '绿色三瓶礼盒，给妈妈的收藏；具体规格看实物。', sprite: 2, sheet: 'products-c', source: '20260928142833' },
+  { id: 'raben', name: 'RABEN 香皂', en: 'GINGER SOAP', type: '日常补给', price: '价格待看', note: '笔记写香茅皂，包装写 Ginger Soap，选购时核对。', sprite: 3, sheet: 'products-c', source: '20260928142833' },
+  { id: 'bsc-shampoo', name: 'BSC Falless 洗发水', en: 'KAFFIR LIME SHAMPOO', type: '日常补给', price: '价格待看', note: '深绿色大泵瓶、青柠图案，与头皮护理液分开收藏。', sprite: 4, sheet: 'products-c', source: '20260928142838' },
+  { id: 'bsc-tonic', name: 'BSC Falless 头皮护理液', en: 'KAFFIR LIME HAIR TONIC', type: '日常补给', price: '价格待看', note: '深绿色旋盖瓶，包装标注 Hair Tonic，按说明使用。', sprite: 5, sheet: 'products-c', source: '20260928142838' },
 ];
 
 export const packing = [
